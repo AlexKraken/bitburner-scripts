@@ -1,4 +1,10 @@
-/** @param {NS} ns */
+/** 
+ * Upgrades the given Bladeburner Skills
+ * 
+ * Requires the Bladeburner API
+ * 
+ * @param {NS} ns 
+ */
 export async function main(ns) {
     while (true) {
 
@@ -10,6 +16,7 @@ export async function main(ns) {
             ns.bladeburner.upgradeSkill("Hands of Midas")
         }
 
-        await ns.sleep(20000);
+        /** Updates every 20 seconds (in milliseconds) */
+        await ns.sleep(20000)
     }
 }
