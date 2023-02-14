@@ -7,16 +7,21 @@
  */
 export async function main(ns) {
     while (true) {
+        const skills = ["Hands of Midas", "Reaper", "Evasive System"]
 
-        while (ns.bladeburner.getSkillUpgradeCost("Hands of Midas") < ns.bladeburner.getSkillPoints()) {
-            if (2 * (ns.bladeburner.getSkillUpgradeCost("Reaper")) < ns.bladeburner.getSkillPoints()) {
-                ns.bladeburner.upgradeSkill("Reaper")
-                ns.bladeburner.upgradeSkill("Evasive System")
+        const total_cost = skills.map(skill =>
+            ns.bladeburner.getSkillUpgradeCost(skill)).reduce((accumulator, current) =>
+                accumulator + current, 0)
+
+        const count = ns.bladeburner.getSkillPoints() / total_cost
+
+        if (count >= 1) {
+            for (let i = 0; i < Math.floor(count); i++) {
+                skills.map(skill => ns.bladeburner.upgradeSkill(skill))
             }
-            ns.bladeburner.upgradeSkill("Hands of Midas")
-        }
 
-        /** Updates every 20 seconds (in milliseconds) */
-        await ns.sleep(20000)
+        }
+        /** Updates every 5 seconds (in milliseconds) */
+        await ns.sleep(5000)
     }
 }
