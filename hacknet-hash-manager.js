@@ -7,17 +7,17 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
-    const HACKNET = ns.hacknet
+    const hacknet = ns.hacknet
     /** The list of upgrades to purchase with hashes */
-    const UPGRADES = [
+    const upgrades = [
         "Exchange for Bladeburner Rank",
         "Exchange for Bladeburner SP",
     ]
 
     while (true) {
-        for (const upgrade of UPGRADES) {
-            if (HACKNET.numHashes() > HACKNET.hashCost(upgrade)) {
-                HACKNET.spendHashes(upgrade)
+        for (const upgrade of upgrades) {
+            if (hacknet.numHashes() > hacknet.hashCost(upgrade)) {
+                hacknet.spendHashes(upgrade)
             }
         }
         /** Updates every second (in milliseconds) */

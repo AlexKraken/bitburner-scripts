@@ -6,47 +6,48 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
-    const GANG = ns.gang
-    const EQUIPMENT = GANG.getEquipmentNames()
-    const MEMBERS = GANG.getMemberNames()
-    const TASKS = GANG.getTaskNames()
-    const ARGS = ns.args.map(arg => arg.toUpperCase())
-    const OPTIONS = new Map()
+    const gang = ns.gang
+    const equipmentList = gang.getEquipmentNames()
+    const members = gang.getMemberNames()
+    const tasks = gang.getTaskNames()
+    const args = ns.args.map(arg => arg.toUpperCase())
+    const options = new Map()
+
     /** Tasks and descriptions */
-    const VALUES = [
+    const descriptions = [
         ["ASCENDALL", "Ascends each eligible gang member"],
         ["BUYALL", "Buys all equipment for each gang member"],
         ["SETALL", "Follow this command with a task to assign to all gang members"]
     ]
-    VALUES.forEach((value) => OPTIONS.set(value[0], value[1]))
+    descriptions.forEach((description) => options.set(description[0], description[1]))
 
     /** Prints out all availible options if no arguments are passed */
-    if (ARGS.length === 0) {
-        for (const [option, purpose] of OPTIONS.entries()) {
+    if (args.length === 0) {
+        for (const [option, purpose] of options.entries()) {
             ns.tprint(option + ": " + purpose)
         }
-        ns.tprint("Tasks: ", TASKS)
+        ns.tprint("Tasks: ", tasks)
     }
 
     /** Purchases all equipment for each member */
-    if (ARGS.includes("BUYALL")) {
-        MEMBERS.forEach((member) =>
-            EQUIPMENT.forEach((equipment) =>
-                GANG.purchaseEquipment(member, equipment)
+    if (args.includes("BUYALL")) {
+        members.forEach((member) =>
+            equipmentList.forEach((equipment) =>
+                gang.purchaseEquipment(member, equipment)
             ))
     }
 
     /** Ascends each member */
-    if (ARGS.includes("ASCENDALL")) {
-        MEMBERS.forEach((member) => GANG.ascendMember(member))
+    if (args.includes("ASCENDALL")) {
+        members.forEach((member) => gang.ascendMember(member))
     }
 
     /** Sets the task for all members */
-    if (ARGS.includes("SETALL")) {
-        const task = ARGS[ARGS.indexOf("SETALL") + 1]
-        const task_formatted = task.split(" ").map(word => word[0] + word.substr(1).toLowerCase()).join(" ")
+    if (args.includes("SETALL")) {
+        const task = args[args.indexOf("SETALL") + 1]
+        const taskFormatted = task.split(" ").map(word => word[0] + word.substr(1).toLowerCase()).join(" ")
 
-        MEMBERS.forEach((member) => GANG.setMemberTask(member, task_formatted))
+        members.forEach((member) => gang.setMemberTask(member, taskFormatted))
     }
 
     ns.exit()

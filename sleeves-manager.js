@@ -6,11 +6,12 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
-    const SLEEVES = ns.sleeve.getNumSleeves()
-    const ACTION = ns.args[0]
+    const sleeves = ns.sleeve.getNumSleeves()
+    const action = ns.args[0]
 
-    for (let i = 0; i < SLEEVES; i++) {
-        ns.sleeve.setToBladeburnerAction(i, ACTION)
+    for (let i = 0; i < sleeves; i++) {
+        /** Assign the task to the ith sleeve */
+        ns.sleeve.setToBladeburnerAction(i, action)
 
         /** Waits 0.1 seconds before setting next task (in milliseconds) */
         await ns.sleep(100)
