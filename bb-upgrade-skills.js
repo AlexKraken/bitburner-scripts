@@ -6,9 +6,11 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
+
+    /** The Bladeburner skills to upgrade */
+    const skills = ns.args
+
     while (true) {
-        /** The Bladeburner skills to upgrade */
-        const skills = ns.args
 
         /** Sum up the total cost of skills to be upgraded */
         const totalCost = skills.map(skill =>
