@@ -14,7 +14,7 @@ export async function main(ns) {
 
     /** Run the scripts with the above options */
     ns.run("bb-upgrade-skills.js", numThreads = 1, ...bladeburnerSkillS)
-    ns.run("sleeve-manager.js", numThreads = 1, sleeveTask)
+    ns.run("sleeves-manager.js", numThreads = 1, sleeveTask)
 
     if (ns.singularity.purchaseTor()) {
         /** Get a reference to the terminal text field */
