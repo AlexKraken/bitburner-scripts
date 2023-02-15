@@ -7,13 +7,13 @@
  */
 export async function main(ns) {
     const SLEEVES = ns.sleeve.getNumSleeves()
-    const ACTION = "Infiltrate synthoids"
+    const ACTION = ns.args[0]
 
     for (let i = 0; i < SLEEVES; i++) {
         ns.sleeve.setToBladeburnerAction(i, ACTION)
 
-        /** Waits a second before setting next task (in milliseconds) */
-        await ns.sleep(1000)
+        /** Waits 0.1 seconds before setting next task (in milliseconds) */
+        await ns.sleep(100)
     }
     ns.exit()
 }

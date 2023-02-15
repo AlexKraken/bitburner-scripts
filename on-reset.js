@@ -7,8 +7,13 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
-    ns.run("bb-upgrade-skills.js")
-    ns.run("sleeve-manager.js")
+    /** The Bladeburner skills to upgrade */
+    const bbSkills = ["Hands of Midas", "Reaper", "Evasive System"]
+    /** The task to assign to all sleeves */
+    const sleeveTask = "Infiltrate synthoids"
+
+    ns.run("bb-upgrade-skills.js", numThreads = 1, ...bbSkills)
+    ns.run("sleeve-manager.js", numThreads = 1, sleeveTask)
 
     if (ns.singularity.purchaseTor()) {
         /** Get a reference to the terminal text field */
