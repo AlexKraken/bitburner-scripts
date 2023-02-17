@@ -1,7 +1,7 @@
 /** 
- * Upgrades the given Bladeburner Skills
+ * Upgrades the given Bladeburner Skills.
  * 
- * Requires the Bladeburner API
+ * Requires the Bladeburner API.
  * 
  * @param {NS} ns 
  */
