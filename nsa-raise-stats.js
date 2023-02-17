@@ -1,18 +1,24 @@
 /** 
- * Raises the player's stats until they reach the minimum requirement
- * for joining the NSA's Bladeburner Division
+ * Raises the player's stats until they reach the minimum requirement for 
+ * joining the NSA's Bladeburner Division. After the player reaches the 
+ * requirement and joins Bladeburner, the script starts the player on a
+ * Bladeburner task since those tasks do not require 'focus' - allowing the 
+ * player to continue interacting with the rest of the game.
  * 
- * Requires the Singularity API
+ * Note that while 'working out' this *will* pull 'focus' - on every update it 
+ * will revert back to the gym workout screen to remove the penalty for not 
+ * focusing on a task.
+ * 
+ * Requires the Singularity API.
  * 
  * @param {NS} ns 
  */
 export async function main(ns) {
-    /** 
-     * The NSA requirement is 100 for each combat stat
-     * The most effective Gym is 'Powerhouse Gym' in Sector-12
-     */
+    /** The NSA requirement is 100 for each combat stat*/
     const requirement = 100
+    /** The most effective Gym is 'Powerhouse Gym' in Sector-12 */
     const gym = 'Powerhouse Gym'
+    const singularity = ns.singularity
     let requirementMet = false
 
     while (!requirementMet) {
@@ -23,23 +29,30 @@ export async function main(ns) {
         const dex = player.skills.dexterity
         const agi = player.skills.agility
 
-        /** Set the stat that will increment until it reaches the requirement */
+        /** Set the stat that will increment until it reaches the requirement. */
         if (str < requirement) {
-            ns.singularity.gymWorkout(gym, 'strength')
+            singularity.gymWorkout(gym, 'strength')
         } else if (def < requirement) {
-            ns.singularity.gymWorkout(gym, 'defense')
+            singularity.gymWorkout(gym, 'defense')
         } else if (dex < requirement) {
-            ns.singularity.gymWorkout(gym, 'dexterity')
+            singularity.gymWorkout(gym, 'dexterity')
         } else if (agi < requirement) {
-            ns.singularity.gymWorkout(gym, 'agility')
-        } else { requirementMet = true }
+            singularity.gymWorkout(gym, 'agility')
+        } else {
+            requirementMet = true
+
+            /** Stop the action to allow another to begin uninterrupted */
+            singularity.stopAction()
+        }
 
         /** Updates every 10 seconds (in milliseconds) */
         await ns.sleep(10000)
     }
 
-    /** Join the Bladeburner Division and start working on a related task */
+    /** Join the Bladeburner Division */
     ns.bladeburner.joinBladeburnerDivision()
+
+    /** Start working on a Bladeburner task */
     ns.bladeburner.startAction("General", "Field Analysis")
 
     ns.exit()
