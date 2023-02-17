@@ -6,12 +6,7 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
+    /** If no argument is supplied, set 'Shoplift' as default */
     const crime = ns.args[0] || 'Shoplift'
-    while (true) {
-        if (!ns.isBusy()) {
-            ns.singularity.commitCrime(crime)
-        }
-        /** Updates every 2 seconds (in milliseconds) */
-        await ns.sleep(2000)
-    }
+    ns.singularity.commitCrime(crime)
 }
