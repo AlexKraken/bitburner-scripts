@@ -1,7 +1,7 @@
 /** 
- * Set tasks for Sleeves
+ * Set tasks for Sleeves.
  *  
- * Requires the Sleeve API
+ * Requires the Sleeve API.
  * 
  * @param {NS} ns 
  */
