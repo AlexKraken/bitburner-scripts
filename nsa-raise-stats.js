@@ -14,7 +14,7 @@
  * @param {NS} ns 
  */
 export async function main(ns) {
-    /** The NSA requirement is 100 for each combat stat*/
+    /** The NSA requirement is 100 for each combat stat */
     const requirement = 100
     /** The most effective Gym is 'Powerhouse Gym' in Sector-12 */
     const gym = 'Powerhouse Gym'
@@ -29,7 +29,7 @@ export async function main(ns) {
         const dex = player.skills.dexterity
         const agi = player.skills.agility
 
-        /** Set the stat that will increment until it reaches the requirement. */
+        /** Set the stat that will increment until it reaches the requirement */
         if (str < requirement) {
             singularity.gymWorkout(gym, 'strength')
         } else if (def < requirement) {

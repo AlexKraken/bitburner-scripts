@@ -1,7 +1,7 @@
 /** 
- * Manages various tasks for the Gang
+ * Manages various tasks for the Gang.
  * 
- * Requires the Gang API
+ * Requires the Gang API.
  * 
  * @param {NS} ns 
  */

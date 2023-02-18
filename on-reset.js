@@ -2,7 +2,7 @@
  * Runs specified scripts. Used after installing augmentations,
  * game crash, etc. to quickly get up and running.
  * 
- * Requires all APIs of the subsequent scripts
+ * Requires all APIs of the subsequent scripts.
  * 
  * @param {NS} ns 
  */
